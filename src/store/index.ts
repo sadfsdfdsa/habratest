@@ -1,11 +1,19 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-Vue.use(Vuex);
+import { Module, createStore } from 'vuex-smart-module'
+import habr from './modules/habrModule'
 
-export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {}
-});
+Vue.use(Vuex)
+
+const root = new Module({
+  modules: {
+    habr,
+  },
+})
+
+const store = createStore(root)
+
+export default store
+
+export const habrModule = habr.context(store)
